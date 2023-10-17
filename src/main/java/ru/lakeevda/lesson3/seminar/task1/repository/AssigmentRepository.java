@@ -1,6 +1,6 @@
 package ru.lakeevda.lesson3.seminar.task1.repository;
 
-import ru.lakeevda.lesson3.seminar.task1.classes.Assigment;
+import ru.lakeevda.lesson3.seminar.task1.model.Assigment;
 
 import java.util.ArrayList;
 import java.util.List;

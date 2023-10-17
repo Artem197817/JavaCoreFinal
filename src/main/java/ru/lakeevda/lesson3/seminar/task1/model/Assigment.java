@@ -1,6 +1,4 @@
-package ru.lakeevda.lesson3.seminar.task1.classes;
-
-import ru.lakeevda.lesson3.seminar.task1.enums.Status;
+package ru.lakeevda.lesson3.seminar.task1.model;
 
 import java.time.LocalDate;
 
@@ -52,8 +50,8 @@ public class Assigment {
     @Override
     public String toString() {
         return "Assigment{" +
-                "employee=" + employee +
-                ", task=" + task +
+                "employee=" + employee + "\n" +
+                ", task=" + task + "\n" +
                 ", factStartDate=" + factStartDate +
                 ", factEndDate=" + factEndDate +
                 ", status=" + status +

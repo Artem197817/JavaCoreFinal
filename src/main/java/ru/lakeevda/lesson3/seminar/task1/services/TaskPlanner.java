@@ -1,5 +1,8 @@
-package ru.lakeevda.lesson3.seminar.task1.classes;
+package ru.lakeevda.lesson3.seminar.task1.services;
 
+import ru.lakeevda.lesson3.seminar.task1.model.Assigment;
+import ru.lakeevda.lesson3.seminar.task1.model.Employee;
+import ru.lakeevda.lesson3.seminar.task1.model.Task;
 import ru.lakeevda.lesson3.seminar.task1.repository.AssigmentRepository;
 
 import java.util.List;

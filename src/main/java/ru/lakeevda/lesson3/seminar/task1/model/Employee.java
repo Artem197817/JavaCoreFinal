@@ -1,6 +1,4 @@
-package ru.lakeevda.lesson3.seminar.task1.classes;
-
-import ru.lakeevda.lesson3.seminar.task1.enums.Skill;
+package ru.lakeevda.lesson3.seminar.task1.model;
 
 import java.time.LocalDate;
 
@@ -14,12 +12,11 @@ public class Employee {
 
     private boolean isWorking = false;
 
-    public Employee(String lastName, String firstName, LocalDate birthDate, double salary, Department department, Skill skill) {
+    public Employee(String lastName, String firstName, LocalDate birthDate, double salary, Skill skill) {
         this.lastName = lastName;
         this.firstName = firstName;
         this.birthDate = birthDate;
         this.salary = salary;
-        this.department = department;
         this.skill = skill;
     }
 
@@ -74,7 +71,6 @@ public class Employee {
                 ", firstName='" + firstName + '\'' +
                 ", birthDate=" + birthDate +
                 ", salary=" + salary +
-                ", department=" + department +
                 ", skill=" + skill +
                 '}';
     }

@@ -1,8 +1,8 @@
 package ru.lakeevda.lesson3.seminar.task1.services;
 
-import ru.lakeevda.lesson3.seminar.task1.classes.Assigment;
-import ru.lakeevda.lesson3.seminar.task1.classes.Employee;
-import ru.lakeevda.lesson3.seminar.task1.enums.Status;
+import ru.lakeevda.lesson3.seminar.task1.model.Assigment;
+import ru.lakeevda.lesson3.seminar.task1.model.Employee;
+import ru.lakeevda.lesson3.seminar.task1.model.Status;
 import ru.lakeevda.lesson3.seminar.task1.repository.AssigmentRepository;
 
 import java.time.LocalDate;
