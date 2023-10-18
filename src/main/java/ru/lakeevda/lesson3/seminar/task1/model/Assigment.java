@@ -3,8 +3,8 @@ package ru.lakeevda.lesson3.seminar.task1.model;
 import java.time.LocalDate;
 
 public class Assigment {
-    private Employee employee;
-    private Task task;
+    private final Employee employee;
+    private final Task task;
     private LocalDate factStartDate;
     private LocalDate factEndDate;
     private Status status;

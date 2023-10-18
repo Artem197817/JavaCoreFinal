@@ -6,8 +6,7 @@ public class Task {
     private String name;
 
     private LocalDate createDate;
-//    private LocalDate beginDate;
-//    private LocalDate factEndDate;
+
     private LocalDate dueDate;
     private Priority priority;
     private Skill skill;
@@ -21,6 +20,14 @@ public class Task {
         this.skill = skill;
         this.priority = Priority.P2;
         this.length = length;
+    }
+
+    public Priority getPriority() {
+        return priority;
+    }
+
+    public void setPriority(Priority priority) {
+        this.priority = priority;
     }
 
     public String getName() {
@@ -69,8 +76,6 @@ public class Task {
         return "Task{" +
                 "name='" + name + '\'' +
                 ", createDate=" + createDate +
-//                ", beginDate=" + beginDate +
-//                ", factEndDate=" + factEndDate +
                 ", dueDate=" + dueDate +
                 ", priority=" + priority +
                 ", skill=" + skill +

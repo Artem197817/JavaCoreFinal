@@ -3,9 +3,9 @@ package ru.lakeevda.lesson3.seminar.task1.model;
 import java.time.LocalDate;
 
 public class Employee {
-    private String lastName;
-    private String firstName;
-    private LocalDate birthDate;
+    private final String lastName;
+    private final String firstName;
+    private final LocalDate birthDate;
     private double salary;
     private Department department;
     private Skill skill;
