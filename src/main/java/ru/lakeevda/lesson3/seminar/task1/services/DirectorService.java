@@ -8,14 +8,12 @@ import ru.lakeevda.lesson3.seminar.task1.view.View;
 
 
 public class DirectorService {
-    private final Director director;
 
 
     private DirectorService(Director director) {
-        this.director = director;
     }
 
-    public static DirectorService factoryManagerService(Director director) {
+    public static DirectorService factoryDirectorService(Director director) {
         try {
             if (Skill.DIRECTOR == director.getSkill()) {
                 return new DirectorService(director);

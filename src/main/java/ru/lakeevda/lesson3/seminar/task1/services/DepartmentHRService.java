@@ -12,10 +12,10 @@ import java.util.List;
 public class DepartmentHRService {
 
     public List<Department> departments;
-    public List<Department> addDepartment (Department department) {
+
+    public void addDepartment (Department department) {
         if (departments == null) departments = new ArrayList<>();
         departments.add(department);
-        return departments;
     }
 
     public void addEmployeeDepartment(Department department, Employee employee) {

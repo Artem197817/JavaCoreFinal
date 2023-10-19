@@ -35,8 +35,8 @@ public class SelectionEmployee {
             }
         }
         managerService.informingManager("ВНИМАНИЕ МЕНЕДЖЕРА! В департаменте " + skill
-                + " нет свободныч работников для задания с высшим пиоритетом");
-       return departmentHRService.getDepartmentManager(skill);
+                + " нет свободных работников для задания с высшим пиоритетом");
+        return departmentHRService.getDepartmentManager(skill);
 
     }
 }

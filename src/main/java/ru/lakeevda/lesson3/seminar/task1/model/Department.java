@@ -5,13 +5,12 @@ import java.util.List;
 
 public class Department {
     private final Skill skill;
-    private List<Employee> departmentEmployee;
+    public List<Employee> departmentEmployee;
+    private Employee manager;
 
     public void setManager(Employee manager) {
         this.manager = manager;
     }
-
-    private Employee manager;
 
     public Department(Skill skill) {
         this.skill = skill;
@@ -29,14 +28,10 @@ public class Department {
         return departmentEmployee;
     }
 
-    public void setDepartmentEmployee(List<Employee> departmentEmployee) {
-        this.departmentEmployee = departmentEmployee;
-    }
 
-    public List<Employee> addEmployee(Employee employee) {
+    public void addEmployee(Employee employee) {
         if (departmentEmployee == null) departmentEmployee = new ArrayList<>();
         departmentEmployee.add(employee);
-        return departmentEmployee;
     }
 
     @Override

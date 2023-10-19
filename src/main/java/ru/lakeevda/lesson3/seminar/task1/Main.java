@@ -1,7 +1,6 @@
 package ru.lakeevda.lesson3.seminar.task1;
 
 import ru.lakeevda.lesson3.seminar.task1.model.*;
-import ru.lakeevda.lesson3.seminar.task1.repository.AssigmentRepository;
 import ru.lakeevda.lesson3.seminar.task1.repository.EmployeeRepository;
 import ru.lakeevda.lesson3.seminar.task1.services.*;
 
@@ -75,12 +74,10 @@ public class Main {
                 , 20);
         task3.setPriority(Priority.P1);
 
-        ManagerService managerService = ManagerService.factoryManagerService(employee3,departmentEngineer);
+        ManagerService managerService = ManagerService.factoryManagerService(employee3, departmentEngineer);
         EmployeeService employeeService = new EmployeeService();
         SelectionEmployee selectionEmployee = new SelectionEmployee(managerService, departmentHRService, employeeService);
-        TaskPlanner taskPlanner = new TaskPlanner(employeeService,selectionEmployee);
-
-        taskPlanner.setEmployees(EmployeeRepository.getEmployees());
+        TaskPlanner taskPlanner = new TaskPlanner(selectionEmployee);
 
         Assigment assigment1 = taskPlanner.planTask(task1);
         employeeService.startTaskByEmployee(assigment1.getEmployee(), assigment1);

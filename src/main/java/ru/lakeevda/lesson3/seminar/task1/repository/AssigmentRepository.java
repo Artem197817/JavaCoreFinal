@@ -12,10 +12,9 @@ abstract public class AssigmentRepository {
         return assigmentList;
     }
 
-    static public List<Assigment> addAssigment(Assigment assigment) {
+    static public void addAssigment(Assigment assigment) {
         if (assigmentList == null) assigmentList = new ArrayList<>();
         assigmentList.add(assigment);
-        return assigmentList;
     }
 
 
