@@ -6,7 +6,17 @@ import ru.lakeevda.lesson3.seminar.task1.model.Skill;
 import ru.lakeevda.lesson3.seminar.task1.services.exeption.SkillException;
 import ru.lakeevda.lesson3.seminar.task1.view.View;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DepartmentHRService {
+
+    public List<Department> departments;
+    public List<Department> addDepartment (Department department) {
+        if (departments == null) departments = new ArrayList<>();
+        departments.add(department);
+        return departments;
+    }
 
     public void addEmployeeDepartment(Department department, Employee employee) {
         department.addEmployee(employee);
@@ -22,5 +32,11 @@ public class DepartmentHRService {
         } catch (SkillException e) {
             View.printConsole(e.getMessage());
         }
+    }
+    public Employee getDepartmentManager (Skill skill){
+       List<Department>  departmentSortSkill = departments.stream()
+               .filter(x-> x.getSkill() == skill)
+               .toList();
+       return departmentSortSkill.get(0).getManager();
     }
 }

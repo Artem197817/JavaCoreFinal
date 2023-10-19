@@ -19,7 +19,7 @@ public class Main {
         EmployeeRepository.addEmployee(employeeHR);
         DepartmentHRService departmentHRService = new DepartmentHRService();
         departmentHRService.appointManager(departmentHR, employeeHR);
-
+        departmentHRService.addDepartment(departmentHR);
         Employee employee1 = new Employee("Смирнов"
                 , "Иван"
                 , LocalDate.of(1965, 2, 26)
@@ -55,6 +55,7 @@ public class Main {
                 , 1000
                 , Skill.DIRECTOR);
         EmployeeRepository.addEmployee(director);
+        departmentHRService.addDepartment(departmentEngineer);
 
         Task task1 = new Task("Задача1"
                 , 1,
@@ -74,8 +75,10 @@ public class Main {
                 , 20);
         task3.setPriority(Priority.P1);
 
+        ManagerService managerService = ManagerService.factoryManagerService(employee3,departmentEngineer);
         EmployeeService employeeService = new EmployeeService();
-        TaskPlanner taskPlanner = new TaskPlanner(employeeService);
+        SelectionEmployee selectionEmployee = new SelectionEmployee(managerService, departmentHRService, employeeService);
+        TaskPlanner taskPlanner = new TaskPlanner(employeeService,selectionEmployee);
 
         taskPlanner.setEmployees(EmployeeRepository.getEmployees());
 
@@ -85,6 +88,10 @@ public class Main {
         employeeService.startTaskByEmployee(assigment2.getEmployee(), assigment2);
         Assigment assigment3 = taskPlanner.planTask(task3);
         employeeService.startTaskByEmployee(assigment3.getEmployee(), assigment3);
+        Assigment assigment4 = taskPlanner.planTask(task3);
+        employeeService.startTaskByEmployee(assigment4.getEmployee(), assigment4);
+        Assigment assigment5 = taskPlanner.planTask(task3);
+        employeeService.startTaskByEmployee(assigment5.getEmployee(), assigment5);
 
         System.out.println(employeeService.getAssigmentsByEmployee(employee1));
         System.out.println(employeeService.getAssigmentsByEmployee(employee2));

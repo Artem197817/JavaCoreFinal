@@ -37,7 +37,8 @@ public class ManagerService {
                 .forEach(x -> x.setSalary(x.getSalary() * (1 + percentageIncrease)));
     }
 
-    public static void informingManager(String message) {
+    public void informingManager(String message) {
         View.printConsole(message);
     }
+    
 }

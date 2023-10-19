@@ -46,4 +46,5 @@ public class Department {
                 ", manager=" + manager +
                 '}';
     }
+
 }
