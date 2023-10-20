@@ -73,23 +73,33 @@ public class Main {
                 , Skill.ENGINEER
                 , 20);
         task3.setPriority(Priority.P1);
+        Task task4 = new Task("Задача3"
+                , 2,
+                LocalDate.now()
+                , Skill.TECHNOLOGIST
+                , 20);
+        task3.setPriority(Priority.P1);
+
 
         ManagerService managerService = ManagerService.factoryManagerService(employee3, departmentEngineer);
         EmployeeService employeeService = new EmployeeService();
         SelectionEmployee selectionEmployee = new SelectionEmployee(managerService, departmentHRService, employeeService);
         TaskPlanner taskPlanner = new TaskPlanner(selectionEmployee);
 
-        Assigment assigment1 = taskPlanner.planTask(task1);
-        employeeService.startTaskByEmployee(assigment1.getEmployee(), assigment1);
-        Assigment assigment2 = taskPlanner.planTask(task2);
-        employeeService.startTaskByEmployee(assigment2.getEmployee(), assigment2);
-        Assigment assigment3 = taskPlanner.planTask(task3);
-        employeeService.startTaskByEmployee(assigment3.getEmployee(), assigment3);
-        Assigment assigment4 = taskPlanner.planTask(task3);
-        employeeService.startTaskByEmployee(assigment4.getEmployee(), assigment4);
-        Assigment assigment5 = taskPlanner.planTask(task3);
-        employeeService.startTaskByEmployee(assigment5.getEmployee(), assigment5);
+        taskPlanner.planTask(task1);
+        employeeService.startTaskByEmployee(employee1);
+        taskPlanner.planTask(task2);
+        employeeService.startTaskByEmployee(employee2);
+        taskPlanner.planTask(task3);
+        taskPlanner.planTask(task3);
+        taskPlanner.planTask(task3);
+        taskPlanner.planTask(task4);
 
+
+        employeeService.startTaskByEmployee(employee3);
+        employeeService.startTaskByEmployee(employee4);
+
+        System.out.println(taskPlanner.getFreeTask());
         System.out.println(employeeService.getAssigmentsByEmployee(employee1));
         System.out.println(employeeService.getAssigmentsByEmployee(employee2));
         System.out.println(employeeService.getAssigmentsByEmployee(employee3));

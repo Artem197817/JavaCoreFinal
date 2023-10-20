@@ -10,7 +10,6 @@ public class SelectionEmployee {
 
     ManagerService managerService;
     DepartmentHRService departmentHRService;
-
     EmployeeService employeeService;
 
     public SelectionEmployee(ManagerService managerService, DepartmentHRService departmentHRService, EmployeeService employeeService) {
@@ -25,6 +24,7 @@ public class SelectionEmployee {
         List<Employee> sortEmployees = EmployeeRepository.getEmployees().stream()
                 .filter(x -> x.getSkill() == skill)
                 .toList();
+
         for (Employee employee : sortEmployees) {
             if (!employee.isWorking())
                 return employee;
@@ -34,8 +34,8 @@ public class SelectionEmployee {
                 return employee;
             }
         }
-        managerService.informingManager("ВНИМАНИЕ МЕНЕДЖЕРА! В департаменте " + skill
-                + " нет свободных работников для задания с высшим пиоритетом");
+        managerService.informingManager("ВНИМАНИЕ МЕНЕДЖЕРОВ! "
+                + " нет свободных работников для выполнения задания");
         return departmentHRService.getDepartmentManager(skill);
 
     }

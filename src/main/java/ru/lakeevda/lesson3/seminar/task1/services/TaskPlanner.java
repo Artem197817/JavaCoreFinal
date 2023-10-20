@@ -3,22 +3,35 @@ package ru.lakeevda.lesson3.seminar.task1.services;
 import ru.lakeevda.lesson3.seminar.task1.model.*;
 import ru.lakeevda.lesson3.seminar.task1.repository.AssigmentRepository;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class TaskPlanner {
 
     private final SelectionEmployee selectionEmployee;
+    List<Task> freeTask = new ArrayList<>();
 
 
     public TaskPlanner(SelectionEmployee selectionEmployee) {
         this.selectionEmployee = selectionEmployee;
     }
 
-    public Assigment planTask(Task task) {
+    public void planTask(Task task) {
         Employee employee = selectionEmployee.selectionEmployee(task.getSkill());
+        if (employee.getSkill() == Skill.MANAGER){
+               freeTask.add(task);
+            return;
+        }
         Assigment assigment = new Assigment(employee, task);
         AssigmentRepository.addAssigment(assigment);
-        return assigment;
     }
 
+    public List<Task> getFreeTask() {
+        return freeTask;
+    }
 
+    public void setFreeTask(List<Task> freeTask) {
+        this.freeTask = freeTask;
+    }
 }

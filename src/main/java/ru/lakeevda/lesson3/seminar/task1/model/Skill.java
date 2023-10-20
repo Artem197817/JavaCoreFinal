@@ -4,6 +4,7 @@ public enum Skill {
     MANAGER,
     ENGINEER,
     HR,
-    DIRECTOR
+    DIRECTOR,
+    TECHNOLOGIST
 
 }

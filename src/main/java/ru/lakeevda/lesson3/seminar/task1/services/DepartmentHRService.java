@@ -6,6 +6,7 @@ import ru.lakeevda.lesson3.seminar.task1.model.Skill;
 import ru.lakeevda.lesson3.seminar.task1.services.exeption.SkillException;
 import ru.lakeevda.lesson3.seminar.task1.view.View;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,6 +38,11 @@ public class DepartmentHRService {
        List<Department>  departmentSortSkill = departments.stream()
                .filter(x-> x.getSkill() == skill)
                .toList();
-       return departmentSortSkill.get(0).getManager();
+      try {
+          return departmentSortSkill.get(0).getManager();
+      }catch (ArrayIndexOutOfBoundsException e){
+          return new Employee("","", LocalDate.of(1950,1,1),0,Skill.MANAGER);
+      }
+
     }
 }
