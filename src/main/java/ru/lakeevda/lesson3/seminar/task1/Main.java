@@ -46,7 +46,7 @@ public class Main {
                 , 100
                 , Skill.HR);
         EmployeeRepository.addEmployee(employee4);
-        departmentHRService.addEmployeeDepartment(departmentEngineer, employee4);
+        departmentHRService.addEmployeeDepartment(departmentHR, employee4);
         Director director = new Director("Петров"
                 , "Петр"
                 , "Петрович"
@@ -109,7 +109,10 @@ public class Main {
         employeeService.startTaskByEmployee(employee3);
         employeeService.startTaskByEmployee(employee4);
 
-        System.out.println(taskPlanner.getFreeTask());
+        assert managerService != null;
+        managerService.manualAssignmentTask();
+
+        System.out.println(TaskPlanner.getFreeTask());
         System.out.println(employeeService.getAssigmentsByEmployee(employee1));
         System.out.println(employeeService.getAssigmentsByEmployee(employee2));
         System.out.println(employeeService.getAssigmentsByEmployee(employee3));

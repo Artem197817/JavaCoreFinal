@@ -35,7 +35,6 @@ public class SelectionEmployee {
                     return employee;
             } else if (checkingTotalTaskCompletionTime(employee))
                 return employee;
-
         }
         managerService.informingManager("ВНИМАНИЕ МЕНЕДЖЕРОВ! "
                 + " нет свободных работников для выполнения задания");
@@ -44,6 +43,7 @@ public class SelectionEmployee {
     }
 
     public boolean checkingTotalTaskCompletionTime(Employee employee) {
+        //    Здесь должна быть логика отслеживающая время до конца рабочего дня
         int maximumTotalTaskCompletionTime = 61;
 
         int totalTaskCompletionTime = employeeService.getAssigmentsByEmployee(employee).stream()

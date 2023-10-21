@@ -2,6 +2,7 @@ package ru.lakeevda.lesson3.seminar.task1.services;
 
 import ru.lakeevda.lesson3.seminar.task1.model.*;
 import ru.lakeevda.lesson3.seminar.task1.repository.AssigmentRepository;
+import ru.lakeevda.lesson3.seminar.task1.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.List;
 public class TaskPlanner {
 
     private final SelectionEmployee selectionEmployee;
-    List<Task> freeTask = new ArrayList<>();
+    public static List<Task> freeTask = new ArrayList<>();
 
 
     public TaskPlanner(SelectionEmployee selectionEmployee) {
@@ -18,20 +19,19 @@ public class TaskPlanner {
     }
 
     public void planTask(Task task) {
-        Employee employee = selectionEmployee.selectionEmployee(task.getSkill(),task.getPriority());
-        if (employee.getSkill() == Skill.MANAGER){
-               freeTask.add(task);
+        Employee employee = selectionEmployee.selectionEmployee(task.getSkill(), task.getPriority());
+        if (employee.getSkill() == Skill.MANAGER) {
+            freeTask.add(task);
             return;
         }
         Assigment assigment = new Assigment(employee, task);
         AssigmentRepository.addAssigment(assigment);
+        View.informingEmployee(employee, task.getPriority());
     }
 
-    public List<Task> getFreeTask() {
+    public static List<Task> getFreeTask() {
         return freeTask;
     }
 
-    public void setFreeTask(List<Task> freeTask) {
-        this.freeTask = freeTask;
-    }
+
 }

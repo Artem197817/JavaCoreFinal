@@ -1,15 +1,17 @@
 package ru.lakeevda.lesson3.seminar.task1.services;
 
-import ru.lakeevda.lesson3.seminar.task1.model.Department;
-import ru.lakeevda.lesson3.seminar.task1.model.Employee;
-import ru.lakeevda.lesson3.seminar.task1.model.Skill;
+import ru.lakeevda.lesson3.seminar.task1.model.*;
+import ru.lakeevda.lesson3.seminar.task1.repository.AssigmentRepository;
 import ru.lakeevda.lesson3.seminar.task1.services.exeption.CheckingAccessRights;
+import ru.lakeevda.lesson3.seminar.task1.view.Input;
 import ru.lakeevda.lesson3.seminar.task1.view.View;
+
+import java.util.List;
 
 public class ManagerService {
 
-    private Employee employee;
-    private Department department;
+    private final Employee employee;
+    private final Department department;
 
     private ManagerService(Employee employee, Department department) {
         this.employee = employee;
@@ -40,5 +42,45 @@ public class ManagerService {
     public void informingManager(String message) {
         View.printConsole(message);
     }
-    
+
+    public void manualAssignmentTask() {
+        List<Task> freeTasksDepartment = TaskPlanner.getFreeTask().stream()
+                .filter(x -> x.getSkill() == department.getSkill())
+                .toList();
+        View.printConsole(freeTasksDepartment.toString());
+        int taskID = inputId("Введите id назначаемой задачи");
+        List<Task> tasks = freeTasksDepartment.stream()
+                .filter(x -> x.getId() == taskID)
+                .toList();
+        if (tasks.isEmpty()) {
+            System.out.println("Неккоректное значение");
+            return;
+        }
+        Task task = tasks.get(0);
+        View.printConsole(department.getDepartmentEmployee().toString());
+        int taskIDEmployee = inputId("Введите  id рвботника для назначения задачи");
+        List<Employee> employees = department.getDepartmentEmployee().stream()
+                .filter(x -> x.getId() == taskIDEmployee)
+                .toList();
+        if (employees.isEmpty()) {
+            System.out.println("Неккоректное значение");
+            return;
+        }
+        Employee employee = employees.get(0);
+        Assigment assigment = new Assigment(employee, task);
+        AssigmentRepository.addAssigment(assigment);
+        View.informingEmployee(employee, task.getPriority());
+    }
+
+    public int inputId(String message) {
+        int id;
+        try {
+            id = Integer.parseInt(Input.inputPane(message));
+        } catch (NumberFormatException | NullPointerException e) {
+            View.printConsole("Неккоректный ввод");
+            id = inputId(message);
+        }
+        return id;
+    }
+
 }

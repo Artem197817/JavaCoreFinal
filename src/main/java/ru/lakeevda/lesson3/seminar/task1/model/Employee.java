@@ -9,6 +9,8 @@ public class Employee {
     private double salary;
     private Department department;
     private Skill skill;
+    private final int id;
+    private static int count;
 
     private boolean isWorking = false;
 
@@ -18,6 +20,7 @@ public class Employee {
         this.birthDate = birthDate;
         this.salary = salary;
         this.skill = skill;
+        this.id = count++;
     }
 
     public String getLastName() {
@@ -64,10 +67,15 @@ public class Employee {
         isWorking = working;
     }
 
+    public int getId() {
+        return id;
+    }
+
     @Override
     public String toString() {
         return "Employee{" +
-                "lastName='" + lastName + '\'' +
+                "id= " + id +
+                ", lastName='" + lastName + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", birthDate=" + birthDate +
                 ", salary=" + salary +

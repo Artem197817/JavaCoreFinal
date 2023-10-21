@@ -1,17 +1,16 @@
 package ru.lakeevda.lesson3.seminar.task1.model;
 
 import java.time.LocalDate;
-import java.util.List;
 
 public class Task {
+    private final int id;
     private String name;
     private LocalDate createDate;
     private LocalDate dueDate;
     private Priority priority;
     private Skill skill;
-    private int length;
-
-
+    private final int length;
+    private static int count = 0;
 
     public Task(String name, int rank, LocalDate dueDate, Skill skill, int length) {
         this.name = name;
@@ -20,6 +19,7 @@ public class Task {
         this.skill = skill;
         this.priority = Priority.P2;
         this.length = length;
+        this.id = count++;
     }
 
     public Priority getPriority() {
@@ -67,15 +67,15 @@ public class Task {
         return length;
     }
 
-    public void setLength(int length) {
-        this.length = length;
+    public int getId() {
+        return id;
     }
-
 
     @Override
     public String toString() {
         return "Task{" +
-                "name='" + name + '\'' +
+                "id = " + id +
+                ", name='" + name + '\'' +
                 ", createDate=" + createDate +
                 ", dueDate=" + dueDate +
                 ", priority=" + priority +

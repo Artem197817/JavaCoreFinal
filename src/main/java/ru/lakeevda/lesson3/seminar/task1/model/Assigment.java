@@ -8,11 +8,14 @@ public class Assigment {
     private LocalDate factStartDate;
     private LocalDate factEndDate;
     private Status status;
+    private final int id;
+    private static int count;
 
     public Assigment(Employee employee, Task task) {
         this.employee = employee;
         this.task = task;
         this.status = Status.NEW;
+        this.id = count++;
     }
 
     public Employee getEmployee() {
@@ -47,10 +50,15 @@ public class Assigment {
         this.status = status;
     }
 
+    public int getId() {
+        return id;
+    }
+
     @Override
     public String toString() {
         return "Assigment{" +
-                "employee=" + employee + "\n" +
+                "id = " + id +
+                ", employee=" + employee + "\n" +
                 ", task=" + task + "\n" +
                 ", factStartDate=" + factStartDate +
                 ", factEndDate=" + factEndDate +
