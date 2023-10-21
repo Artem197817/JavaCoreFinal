@@ -1,10 +1,10 @@
 package ru.lakeevda.lesson3.seminar.task1.services;
 
-import ru.lakeevda.lesson3.seminar.task1.model.Employee;
-import ru.lakeevda.lesson3.seminar.task1.model.Skill;
+import ru.lakeevda.lesson3.seminar.task1.model.*;
 import ru.lakeevda.lesson3.seminar.task1.repository.EmployeeRepository;
 
 import java.util.List;
+
 
 public class SelectionEmployee {
 
@@ -18,7 +18,7 @@ public class SelectionEmployee {
         this.employeeService = employeeService;
     }
 
-    public Employee selectionEmployee(Skill skill) {
+    public Employee selectionEmployee(Skill skill, Priority priority) {
         // При большом количестве заданий необходимо считать общее время заданий и раздавать задания с учетом общей занятости работника
         // Так же при малом количестве заданий все задания будут сыпаться на первого работника. Что тоже не комильфо
         List<Employee> sortEmployees = EmployeeRepository.getEmployees().stream()
@@ -30,13 +30,34 @@ public class SelectionEmployee {
                 return employee;
         }
         for (Employee employee : sortEmployees) {
-            if (employeeService.checkEmployeeTaskPriorityP1(employee)) {
-                return employee;
+            if (priority == Priority.P1) {
+                if (checkEmployeeTaskPriorityP1(employee))
+                    return employee;
+                else if (checkingTotalTaskCompletionTime(employee))
+                    return employee;
             }
         }
         managerService.informingManager("ВНИМАНИЕ МЕНЕДЖЕРОВ! "
                 + " нет свободных работников для выполнения задания");
         return departmentHRService.getDepartmentManager(skill);
+
+    }
+
+    public boolean checkingTotalTaskCompletionTime(Employee employee) {
+        int maximumTotalTaskCompletionTime = 61;
+
+        int totalTaskCompletionTime = employeeService.getAssigmentsByEmployee(employee).stream()
+                .filter(x -> x.getStatus() != Status.COMPLETE)
+                .mapToInt(x -> x.getTask().getLength())
+                .sum();
+        return totalTaskCompletionTime < maximumTotalTaskCompletionTime;
+    }
+
+    public boolean checkEmployeeTaskPriorityP1(Employee employee) {
+        List<Assigment> assigmentFilterPriority = employeeService.getAssigmentsByEmployee(employee).stream()
+                .filter(x -> x.getTask().getPriority() == Priority.P1)
+                .toList();
+        return assigmentFilterPriority.isEmpty();
 
     }
 }

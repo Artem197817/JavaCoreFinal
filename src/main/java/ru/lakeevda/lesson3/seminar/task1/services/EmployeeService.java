@@ -64,13 +64,7 @@ public class EmployeeService {
 
     }
 
-    public boolean checkEmployeeTaskPriorityP1(Employee employee) {
-        List<Assigment> assigmentFilterPriority = getAssigmentsByEmployee(employee).stream()
-                .filter(x -> x.getTask().getPriority() == Priority.P1)
-                .toList();
-        return assigmentFilterPriority.isEmpty();
 
-    }
 
     public void onHoldCurrentTask(Employee employee) {
         for (Assigment progressTask : checkingEmployeeHasCompletedTasks(employee))

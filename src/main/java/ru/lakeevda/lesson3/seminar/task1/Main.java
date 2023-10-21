@@ -66,14 +66,14 @@ public class Main {
                 , 2,
                 LocalDate.now()
                 , Skill.ENGINEER
-                , 20);
+                , 120);
         Task task3 = new Task("Задача3"
                 , 2,
                 LocalDate.now()
                 , Skill.ENGINEER
                 , 20);
         task3.setPriority(Priority.P1);
-        Task task4 = new Task("Задача3"
+        Task task4 = new Task("Задача4"
                 , 2,
                 LocalDate.now()
                 , Skill.TECHNOLOGIST

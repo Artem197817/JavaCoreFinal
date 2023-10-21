@@ -18,7 +18,7 @@ public class TaskPlanner {
     }
 
     public void planTask(Task task) {
-        Employee employee = selectionEmployee.selectionEmployee(task.getSkill());
+        Employee employee = selectionEmployee.selectionEmployee(task.getSkill(),task.getPriority());
         if (employee.getSkill() == Skill.MANAGER){
                freeTask.add(task);
             return;
