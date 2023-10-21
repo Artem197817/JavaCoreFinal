@@ -18,7 +18,7 @@ public class EmployeeService {
 
     /**
      * Полностью поменял логику старта задач. При нажатии сотрудником кнопки "Взять задачу"
-     * сотруднику автоматически в работу выдаеться задача с наивысшим приоритетом из спмска назначенных
+     * сотруднику автоматически в работу выдается задача с наивысшим приоритетом из спмска назначенных
      * ему planTask - ом
      */
 
@@ -32,7 +32,7 @@ public class EmployeeService {
                 .sorted(Comparator.comparingInt(x -> x.getTask().getPriority().getPriority()))
                 .toList();
         if (assigmentsSort.isEmpty()) {
-            View.printConsole("Нет невыполненных задач");
+            View.printConsole("Спмсок назначенных задач пуст");
             return;
         }
         employee.setWorking(true);
@@ -61,9 +61,7 @@ public class EmployeeService {
         employee.setWorking(false);
         assigment.setFactEndDate(LocalDate.now());
         assigment.setStatus(Status.COMPLETE);
-
     }
-
 
 
     public void onHoldCurrentTask(Employee employee) {

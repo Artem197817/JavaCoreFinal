@@ -33,9 +33,9 @@ public class SelectionEmployee {
             if (priority == Priority.P1) {
                 if (checkEmployeeTaskPriorityP1(employee))
                     return employee;
-                else if (checkingTotalTaskCompletionTime(employee))
-                    return employee;
-            }
+            } else if (checkingTotalTaskCompletionTime(employee))
+                return employee;
+
         }
         managerService.informingManager("ВНИМАНИЕ МЕНЕДЖЕРОВ! "
                 + " нет свободных работников для выполнения задания");

@@ -79,7 +79,16 @@ public class Main {
                 , Skill.TECHNOLOGIST
                 , 20);
         task3.setPriority(Priority.P1);
-
+        Task task5 = new Task("Задача5"
+                , 2,
+                LocalDate.now()
+                , Skill.ENGINEER
+                , 120);
+        Task task6 = new Task("Задача6"
+                , 2,
+                LocalDate.now()
+                , Skill.ENGINEER
+                , 120);
 
         ManagerService managerService = ManagerService.factoryManagerService(employee3, departmentEngineer);
         EmployeeService employeeService = new EmployeeService();
@@ -94,7 +103,8 @@ public class Main {
         taskPlanner.planTask(task3);
         taskPlanner.planTask(task3);
         taskPlanner.planTask(task4);
-
+        taskPlanner.planTask(task5);
+        taskPlanner.planTask(task6);
 
         employeeService.startTaskByEmployee(employee3);
         employeeService.startTaskByEmployee(employee4);
