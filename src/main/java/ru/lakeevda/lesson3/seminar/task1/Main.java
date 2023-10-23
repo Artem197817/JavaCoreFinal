@@ -109,12 +109,16 @@ public class Main {
         employeeService.startTaskByEmployee(employee3);
         employeeService.startTaskByEmployee(employee4);
 
-        assert managerService != null;
-        managerService.manualAssignmentTask();
+     //   assert managerService != null;
+      //  managerService.manualAssignmentTask();
 
-        System.out.println(TaskPlanner.getFreeTask());
-        System.out.println(employeeService.getAssigmentsByEmployee(employee1));
-        System.out.println(employeeService.getAssigmentsByEmployee(employee2));
-        System.out.println(employeeService.getAssigmentsByEmployee(employee3));
+       // System.out.println(TaskPlanner.getFreeTask());
+       // System.out.println(employeeService.getAssigmentsByEmployee(employee1));
+       // System.out.println(employeeService.getAssigmentsByEmployee(employee2));
+       // System.out.println(employeeService.getAssigmentsByEmployee(employee3));
+
+        FileService fileService = new FileService();
+        fileService.fileWriterEmployee(EmployeeRepository.getEmployees());
+        System.out.println(fileService.fileReaderEmployee());
     }
 }

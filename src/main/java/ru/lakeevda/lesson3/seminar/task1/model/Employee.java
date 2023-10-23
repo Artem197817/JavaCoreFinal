@@ -22,6 +22,14 @@ public class Employee {
         this.skill = skill;
         this.id = count++;
     }
+    public Employee(String lastName, String firstName, LocalDate birthDate, double salary, Skill skill,int id) {
+        this.lastName = lastName;
+        this.firstName = firstName;
+        this.birthDate = birthDate;
+        this.salary = salary;
+        this.skill = skill;
+        this.id = id;
+    }
 
     public String getLastName() {
         return lastName;
