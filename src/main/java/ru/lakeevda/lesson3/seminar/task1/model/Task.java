@@ -6,20 +6,52 @@ public class Task {
     private final int id;
     private String name;
     private LocalDate createDate;
-    private LocalDate dueDate;
+    private LocalDate factStartDate = LocalDate.of(1000,1,1);
+    private  LocalDate factEndDate;
+
     private Priority priority;
     private Skill skill;
     private final int length;
-    private static int count = 0;
+    private static int count = 1;
+    private  int idEmployee = 0;
+    private Status status;
 
-    public Task(String name, int rank, LocalDate dueDate, Skill skill, int length) {
+    public Task(String name, LocalDate createDate, Skill skill, int length) {
         this.name = name;
         this.createDate = LocalDate.now();
-        this.dueDate = dueDate;
         this.skill = skill;
         this.priority = Priority.P2;
         this.length = length;
         this.id = count++;
+        this.status = Status.NEW;
+    }
+    public Task(String name, LocalDate factStartDate, LocalDate createDate, Skill skill,Priority priority,
+                int length, int id, int idEmployee,Status status) {
+        this.name = name;
+        this.createDate = createDate;
+        this.factStartDate = factStartDate;
+        this.skill = skill;
+        this.priority = priority;
+        this.length = length;
+        this.id = id;
+        this.status = status;
+        this.idEmployee = idEmployee;
+    }
+
+    public int getIdEmployee() {
+        return idEmployee;
+    }
+
+    public void setIdEmployee(int idEmployee) {
+        this.idEmployee = idEmployee;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     public Priority getPriority() {
@@ -47,12 +79,12 @@ public class Task {
         this.createDate = createDate;
     }
 
-    public LocalDate getDueDate() {
-        return dueDate;
+    public LocalDate getFactStartDate() {
+        return factStartDate;
     }
 
-    public void setDueDate(LocalDate dueDate) {
-        this.dueDate = dueDate;
+    public void setFactStartDate(LocalDate factStartDate) {
+        this.factStartDate = factStartDate;
     }
 
     public Skill getSkill() {
@@ -71,15 +103,24 @@ public class Task {
         return id;
     }
 
+    public void setFactEndDate(LocalDate factEndDate) {
+        this.factEndDate = factEndDate;
+    }
+
     @Override
     public String toString() {
         return "Task{" +
                 "id = " + id +
                 ", name='" + name + '\'' +
                 ", createDate=" + createDate +
-                ", dueDate=" + dueDate +
+                ", factStartDate=" + factStartDate +
                 ", priority=" + priority +
                 ", skill=" + skill +
+                ", status=" + status +
                 '}';
+    }
+
+    public LocalDate getFactEndDate() {
+        return factEndDate;
     }
 }

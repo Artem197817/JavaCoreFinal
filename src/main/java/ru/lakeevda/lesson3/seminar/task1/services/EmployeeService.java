@@ -28,7 +28,7 @@ public class EmployeeService {
             return;
         }
         List<Assigment> assigmentsSort = getAssigmentsByEmployee(employee).stream()
-                .filter(x -> x.getStatus() != Status.COMPLETE)
+                .filter(x -> x.getTask().getStatus() != Status.COMPLETE)
                 .sorted(Comparator.comparingInt(x -> x.getTask().getPriority().getPriority()))
                 .toList();
         if (assigmentsSort.isEmpty()) {
@@ -37,14 +37,14 @@ public class EmployeeService {
         }
         employee.setWorking(true);
         Assigment assigment = assigmentsSort.get(0);
-        assigment.setFactStartDate(LocalDate.now());
-        assigment.setStatus(Status.IN_PROGRESS);
+        assigment.getTask().setFactStartDate(LocalDate.now());
+        assigment.getTask().setStatus(Status.IN_PROGRESS);
 
     }
 
     public List<Assigment> checkingEmployeeHasCompletedTasks(Employee employee) {
         return getAssigmentsByEmployee(employee).stream()
-                .filter(x -> x.getStatus() != Status.IN_PROGRESS)
+                .filter(x -> x.getTask().getStatus() != Status.IN_PROGRESS)
                 .toList();
     }
 
@@ -59,13 +59,13 @@ public class EmployeeService {
         }
         Assigment assigment = assigmentsSort.get(0);
         employee.setWorking(false);
-        assigment.setFactEndDate(LocalDate.now());
-        assigment.setStatus(Status.COMPLETE);
+        assigment.getTask().setFactEndDate(LocalDate.now());
+        assigment.getTask().setStatus(Status.COMPLETE);
     }
 
 
     public void onHoldCurrentTask(Employee employee) {
         for (Assigment progressTask : checkingEmployeeHasCompletedTasks(employee))
-            progressTask.setStatus(Status.OnHOLD);
+            progressTask.getTask().setStatus(Status.OnHOLD);
     }
 }

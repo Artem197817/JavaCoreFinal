@@ -18,10 +18,10 @@ public class ManagerService {
         this.department = department;
     }
 
-    public static ManagerService factoryManagerService(Employee employee, Department department) {
+    public static ManagerService factoryManagerService(Employee employee) {
         try {
-            if (department.getManager() == employee || employee.getSkill() == Skill.DIRECTOR) {
-                return new ManagerService(employee, department);
+            if (employee.getSkill() == Skill.MANAGER || employee.getSkill() == Skill.DIRECTOR) {
+                return new ManagerService(employee, employee.getDepartment());
             } else throw new CheckingAccessRights();
         } catch (CheckingAccessRights e) {
             View.printConsole(e.getMessage());

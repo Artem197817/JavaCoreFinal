@@ -3,13 +3,13 @@ package ru.lakeevda.lesson3.seminar.task1.model;
 import java.time.LocalDate;
 
 public class Employee {
-    private final String lastName;
-    private final String firstName;
-    private final LocalDate birthDate;
+    private  String lastName;
+    private  String firstName;
+    private  LocalDate birthDate;
     private double salary;
     private Department department;
     private Skill skill;
-    private final int id;
+    private  int id;
     private static int count;
 
     private boolean isWorking = false;
@@ -22,14 +22,18 @@ public class Employee {
         this.skill = skill;
         this.id = count++;
     }
-    public Employee(String lastName, String firstName, LocalDate birthDate, double salary, Skill skill,int id) {
+
+    public Employee(String lastName, String firstName, LocalDate birthDate, double salary
+            , Skill skill, int id, Department department) {
         this.lastName = lastName;
         this.firstName = firstName;
         this.birthDate = birthDate;
         this.salary = salary;
         this.skill = skill;
         this.id = id;
+        this.department = department;
     }
+    public Employee (Skill skill){}
 
     public String getLastName() {
         return lastName;

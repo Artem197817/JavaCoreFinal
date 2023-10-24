@@ -26,6 +26,7 @@ public class TaskPlanner {
         }
         Assigment assigment = new Assigment(employee, task);
         AssigmentRepository.addAssigment(assigment);
+        task.setIdEmployee(employee.getId());
         View.informingEmployee(employee, task.getPriority());
     }
 

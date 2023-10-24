@@ -47,7 +47,7 @@ public class SelectionEmployee {
         int maximumTotalTaskCompletionTime = 61;
 
         int totalTaskCompletionTime = employeeService.getAssigmentsByEmployee(employee).stream()
-                .filter(x -> x.getStatus() != Status.COMPLETE)
+                .filter(x -> x.getTask().getStatus() != Status.COMPLETE)
                 .mapToInt(x -> x.getTask().getLength())
                 .sum();
         return totalTaskCompletionTime < maximumTotalTaskCompletionTime;

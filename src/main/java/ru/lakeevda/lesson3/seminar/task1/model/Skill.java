@@ -5,6 +5,8 @@ public enum Skill {
     ENGINEER,
     HR,
     DIRECTOR,
-    TECHNOLOGIST
+    TECHNOLOGIST,
+
+    NoSKILL
 
 }
