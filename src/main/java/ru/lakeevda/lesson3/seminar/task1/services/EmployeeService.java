@@ -2,6 +2,7 @@ package ru.lakeevda.lesson3.seminar.task1.services;
 
 import ru.lakeevda.lesson3.seminar.task1.model.*;
 import ru.lakeevda.lesson3.seminar.task1.repository.AssigmentRepository;
+import ru.lakeevda.lesson3.seminar.task1.repository.EmployeeRepository;
 import ru.lakeevda.lesson3.seminar.task1.view.View;
 
 import java.time.LocalDate;
@@ -15,6 +16,13 @@ public class EmployeeService {
                 .filter(x -> x.getEmployee() == employee)
                 .toList();
     }
+    public List<Assigment> getAssigmentsByIdEmployee(){
+        ScannerService scannerService = new ScannerService();
+        Employee employee = EmployeeRepository.getEmployeeById(scannerService.intScanner("Введите id сотрудника"));
+        if (employee.getSkill() == Skill.NoSKILL)
+            System.out.println("Неккоректное значение");
+        return getAssigmentsByEmployee(employee);
+    }
 
     /**
      * Полностью поменял логику старта задач. При нажатии сотрудником кнопки "Взять задачу"
@@ -23,7 +31,7 @@ public class EmployeeService {
      */
 
     public void startTaskByEmployee(Employee employee) {
-        if (checkingEmployeeHasCompletedTasks(employee).isEmpty() && !getAssigmentsByEmployee(employee).isEmpty()) {
+        if (!checkingEmployeeHasCompletedTasks(employee).isEmpty()) {
             View.printConsole("Необходимо завершить/отложить текущее задание");
             return;
         }
@@ -31,6 +39,7 @@ public class EmployeeService {
                 .filter(x -> x.getTask().getStatus() != Status.COMPLETE)
                 .sorted(Comparator.comparingInt(x -> x.getTask().getPriority().getPriority()))
                 .toList();
+        assigmentsSort.forEach(System.out::println);
         if (assigmentsSort.isEmpty()) {
             View.printConsole("Спмсок назначенных задач пуст");
             return;
@@ -44,7 +53,7 @@ public class EmployeeService {
 
     public List<Assigment> checkingEmployeeHasCompletedTasks(Employee employee) {
         return getAssigmentsByEmployee(employee).stream()
-                .filter(x -> x.getTask().getStatus() != Status.IN_PROGRESS)
+                .filter(x -> x.getTask().getStatus() == Status.IN_PROGRESS)
                 .toList();
     }
 

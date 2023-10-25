@@ -68,7 +68,8 @@ public class FileService {
                     .append(tas.getLength()).append(";")
                     .append(tas.getId()).append(";")
                     .append(tas.getIdEmployee()).append(";")
-                    .append(tas.getStatus());
+                    .append(tas.getStatus()).append(";")
+                    .append(tas.getFactEndDate());
             taskStringList.add(task.toString());
             task.delete(0, task.length());
         }
@@ -150,7 +151,11 @@ public class FileService {
             int id = Integer.parseInt(temp[6]);
             int idEmployee = Integer.parseInt(temp[7]);
             Status status = Status.valueOf(temp[8]);
-            Task task = new Task(name, factStartDate, createDate, skill, priority, length, id, idEmployee, status);
+            tempLocalDate = temp[9].split("-");
+            LocalDate factEndDate = LocalDate.of(Integer.parseInt(tempLocalDate[0]), Integer.parseInt(tempLocalDate[1])
+                    , Integer.parseInt(tempLocalDate[2]));
+            Task task = new Task(name, factStartDate, createDate, skill, priority, length, id,
+                    idEmployee, status,factEndDate);
             tasks.add(task);
         }
         return tasks;

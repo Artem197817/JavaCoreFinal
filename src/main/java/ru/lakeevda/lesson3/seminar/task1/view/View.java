@@ -15,4 +15,17 @@ public class View {
     public static void informingEmployee(Employee employee, Priority priority) {
         View.printConsole("Для " + employee + " назначена новая задача с приоритетом " + priority);
     }
+
+    public static void help (){
+        printConsole("HELP");
+        printConsole("EXIT");
+        printConsole("GET A");
+        printConsole("GET FT");
+        printConsole("GET E");
+        printConsole("GET AE");
+        printConsole("GET ADE");
+        printConsole("CREATE E");
+        printConsole("CREATE T");
+        printConsole("TASK M");
+    }
 }

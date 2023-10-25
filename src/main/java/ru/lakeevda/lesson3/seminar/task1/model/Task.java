@@ -7,8 +7,7 @@ public class Task {
     private String name;
     private LocalDate createDate;
     private LocalDate factStartDate = LocalDate.of(1000,1,1);
-    private  LocalDate factEndDate;
-
+    private  LocalDate factEndDate =LocalDate.of(1000,1,1);
     private Priority priority;
     private Skill skill;
     private final int length;
@@ -26,7 +25,7 @@ public class Task {
         this.status = Status.NEW;
     }
     public Task(String name, LocalDate factStartDate, LocalDate createDate, Skill skill,Priority priority,
-                int length, int id, int idEmployee,Status status) {
+                int length, int id, int idEmployee,Status status, LocalDate factEndDate) {
         this.name = name;
         this.createDate = createDate;
         this.factStartDate = factStartDate;
@@ -36,6 +35,8 @@ public class Task {
         this.id = id;
         this.status = status;
         this.idEmployee = idEmployee;
+        this.factEndDate = factEndDate;
+
     }
 
     public int getIdEmployee() {
@@ -114,9 +115,11 @@ public class Task {
                 ", name='" + name + '\'' +
                 ", createDate=" + createDate +
                 ", factStartDate=" + factStartDate +
+                ", factEndDate=" + factEndDate +
                 ", priority=" + priority +
                 ", skill=" + skill +
                 ", status=" + status +
+                ", idEmployee=" + idEmployee+
                 '}';
     }
 

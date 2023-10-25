@@ -83,7 +83,7 @@ public class Main {
                 , Skill.ENGINEER
                 , 20);
         task3.setPriority(Priority.P1);
-        Task task7 = new Task("Задача3"
+        Task task7 = new Task("Задача7"
                 ,LocalDate.now()
                 , Skill.ENGINEER
                 , 20);
@@ -101,11 +101,16 @@ public class Main {
                 ,LocalDate.now()
                 , Skill.ENGINEER
                 , 120);
-        Task task8 = new Task("Задача3"
+        Task task8 = new Task("Задача8"
                 ,LocalDate.now()
                 , Skill.ENGINEER
                 , 20);
         task8.setPriority(Priority.P1);
+        Task task9 = new Task("Задача9"
+                ,LocalDate.now()
+                , Skill.ENGINEER
+                , 20);
+        task9.setPriority(Priority.P1);
 
         ManagerService managerService = ManagerService.factoryManagerService(employee3);
         EmployeeService employeeService = new EmployeeService();
@@ -122,6 +127,9 @@ public class Main {
         taskPlanner.planTask(task4);
         taskPlanner.planTask(task5);
         taskPlanner.planTask(task6);
+        employeeService.finishTaskByEmployee(employee1);
+        taskPlanner.planTask(task9);
+        employeeService.startTaskByEmployee(employee1);
 
         employeeService.startTaskByEmployee(employee3);
         employeeService.startTaskByEmployee(employee4);
@@ -130,13 +138,13 @@ public class Main {
       //  managerService.manualAssignmentTask();
 
        // System.out.println(TaskPlanner.getFreeTask());
-       // System.out.println(employeeService.getAssigmentsByEmployee(employee1));
-       // System.out.println(employeeService.getAssigmentsByEmployee(employee2));
+       System.out.println(employeeService.getAssigmentsByEmployee(employee1));
+       System.out.println(employeeService.getAssigmentsByEmployee(employee2));
        // System.out.println(employeeService.getAssigmentsByEmployee(employee3));
 
         FileService fileService = new FileService();
         fileService.fileWriterEmployee(EmployeeRepository.getEmployees());
-
+        fileService.fileWriterAssigmentAndTask(AssigmentRepository.getAssigmentList(),TaskPlanner.getFreeTask());
        // fileService.fileWriterAssigment(AssigmentRepository.getAssigmentList());
         System.out.println(fileService.fileReaderEmployee());
         fileService.fileWriterAssigmentAndTask(AssigmentRepository.getAssigmentList(),TaskPlanner.getFreeTask());

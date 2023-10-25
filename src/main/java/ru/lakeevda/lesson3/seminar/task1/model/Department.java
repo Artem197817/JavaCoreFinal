@@ -36,9 +36,8 @@ public class Department {
 
     @Override
     public String toString() {
-        return "Department " + "\n" + "{" +
+        return "Department " + "{" +
                 "skill='" + skill + '\'' +
-                ", manager=" + manager +
                 '}';
     }
 
