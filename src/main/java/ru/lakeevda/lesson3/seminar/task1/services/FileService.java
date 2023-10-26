@@ -9,13 +9,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FileService {
-    //  private String fileName;
+
 
     public void fileWriter(List<String> dats, String fileName, boolean append) {
         File file = new File(fileName);
         try (FileWriter fileWriter = new FileWriter(file, append)) {
             for (String s : dats) {
-                fileWriter.write(s.toString() + "\n");
+                fileWriter.write(s + "\n");
                 fileWriter.flush();
             }
         } catch (IOException e) {
@@ -25,7 +25,6 @@ public class FileService {
 
     public void fileWriterEmployee(List<Employee> employees) {
         String fileName = "employees.txt";
-        File file = new File(fileName);
         StringBuilder employee = new StringBuilder();
         List<String> employeeStringBuilder = new ArrayList<>();
         for (Employee empl : employees) {
@@ -44,19 +43,21 @@ public class FileService {
     }
 
     public void fileWriterAssigmentAndTask(List<Assigment> assigments, List<Task> freeTask) {
-        String fileName = "task.txt";
-        File file = new File(fileName);
-        StringBuilder assigment = new StringBuilder();
+        String fileName = "tasks.txt";
+        String fileName1 = "taskComplete.txt";
         List<Task> tasks = new ArrayList<>();
+        List<Task> tasksComplete = new ArrayList<>();
         for (Assigment ass : assigments) {
+            if (ass.getTask().getStatus() != Status.COMPLETE)
             tasks.add(ass.getTask());
+            else  tasksComplete.add(ass.getTask());
         }
-        fileWriterTask(tasks, false);
-        fileWriterTask(freeTask, true);
+        fileWriterTask(tasks,fileName, false);
+        fileWriterTask(freeTask,fileName, true);
+        fileWriterTask(tasksComplete,fileName1,true);
     }
 
-    public void fileWriterTask(List<Task> tasks, boolean append) { // Добавить запись завершенныx задач
-        String fileName = "tasks.txt";
+    public void fileWriterTask(List<Task> tasks,String fileName, boolean append) {
         StringBuilder task = new StringBuilder();
         List<String> taskStringList = new ArrayList<>();
         for (Task tas : tasks) {
@@ -74,11 +75,7 @@ public class FileService {
             task.delete(0, task.length());
         }
         fileWriter(taskStringList, fileName, append);
-
     }
-
-
-
 
     public List<String> fileReader(String fileName) {
 
@@ -133,8 +130,16 @@ public class FileService {
 
     public List<Task> fileReaderTask() {
         String fileName = "tasks.txt";
-        List<Task> tasks = new ArrayList<>();
         List<String> stringTask = fileReader(fileName);
+        return parseTask(stringTask);
+    }
+    public List<Task> fileReaderTaskComplete() {
+        String fileName = "taskComplete.txt";
+        List<String> stringTask = fileReader(fileName);
+        return parseTask(stringTask);
+    }
+    public List<Task> parseTask (List<String> stringTask){
+        List<Task> tasks = new ArrayList<>();
         String[] temp;
         for (String str : stringTask) {
             temp = str.split(";");

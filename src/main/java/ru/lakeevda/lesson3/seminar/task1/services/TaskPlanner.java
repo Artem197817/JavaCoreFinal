@@ -34,5 +34,15 @@ public class TaskPlanner {
         return freeTask;
     }
 
+    public void createTask (){
+        ScannerService scannerService = new ScannerService();
+        String name = scannerService.stringScanner("Наименование задачи");
+        Skill skill = scannerService.skillScanner("Skill");
+        int length = scannerService.intScanner("Планируемое время выполнения");
+        Priority priority = scannerService.priorityScanner("Приоритет");
+        Task task = new Task(name,skill,length);
+        task.setPriority(priority);
+        planTask(task);
+    }
 
 }

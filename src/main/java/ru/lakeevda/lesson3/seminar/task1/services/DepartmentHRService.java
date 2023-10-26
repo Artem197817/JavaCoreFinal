@@ -1,8 +1,11 @@
 package ru.lakeevda.lesson3.seminar.task1.services;
 
+import org.jetbrains.annotations.NotNull;
 import ru.lakeevda.lesson3.seminar.task1.model.Department;
 import ru.lakeevda.lesson3.seminar.task1.model.Employee;
 import ru.lakeevda.lesson3.seminar.task1.model.Skill;
+import ru.lakeevda.lesson3.seminar.task1.repository.DepartmentRepository;
+import ru.lakeevda.lesson3.seminar.task1.repository.EmployeeRepository;
 import ru.lakeevda.lesson3.seminar.task1.services.exeption.SkillException;
 import ru.lakeevda.lesson3.seminar.task1.view.View;
 
@@ -14,6 +17,8 @@ public class DepartmentHRService {
 
     public List<Department> departments;
 
+   public ScannerService scannerService = new ScannerService();
+
     public void addDepartment (Department department) {
         if (departments == null) departments = new ArrayList<>();
         departments.add(department);
@@ -24,7 +29,7 @@ public class DepartmentHRService {
         employee.setDepartment(department);
     }
 
-    public void appointManager(Department department, Employee manager) {
+    public void appointManager(Department department, @NotNull Employee manager) {
         try {
             if (manager.getSkill() == Skill.MANAGER || manager.getSkill() == Skill.DIRECTOR) {
                 department.setManager(manager);
@@ -43,6 +48,21 @@ public class DepartmentHRService {
       }catch (ArrayIndexOutOfBoundsException e){
           return new Employee("","", LocalDate.of(1950,1,1),0,Skill.MANAGER);
       }
+    }
 
+    public List<Employee> getEmployeesByDepartment (){
+    Department department = DepartmentRepository.getDepartmentBySkill(scannerService.skillScanner("Skill department"));
+    return department.getDepartmentEmployee();
+    }
+
+    public void createEmployee (){
+
+        String lastName = scannerService.stringScanner("Фамилия");
+        String firstName = scannerService.stringScanner("Имя");
+        LocalDate birthDay = scannerService.dateScanner("День рождения");
+        double salary = (double) scannerService.intScanner("Заработная плата");
+        Skill skill = scannerService.skillScanner("Skill");
+        Employee employee = new Employee(lastName,firstName,birthDay,salary,skill);
+        EmployeeRepository.addEmployee(employee);
     }
 }

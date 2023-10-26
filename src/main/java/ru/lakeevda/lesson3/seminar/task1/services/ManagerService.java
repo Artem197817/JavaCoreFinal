@@ -3,10 +3,10 @@ package ru.lakeevda.lesson3.seminar.task1.services;
 import ru.lakeevda.lesson3.seminar.task1.model.*;
 import ru.lakeevda.lesson3.seminar.task1.repository.AssigmentRepository;
 import ru.lakeevda.lesson3.seminar.task1.services.exeption.CheckingAccessRights;
-import ru.lakeevda.lesson3.seminar.task1.view.Input;
 import ru.lakeevda.lesson3.seminar.task1.view.View;
 
 import java.util.List;
+
 
 public class ManagerService {
 
@@ -29,6 +29,28 @@ public class ManagerService {
         return null;
     }
 
+    public static void assigmentTaskManual() {
+        Employee manager = null;
+        DepartmentHRService departmentHRService = new DepartmentHRService();
+        List<Employee> employeesByDepartment = departmentHRService.getEmployeesByDepartment();
+        if (employeesByDepartment.isEmpty()) {
+            View.printConsole("В департаменте нет работников");
+            return;
+        }
+        for (Employee emp : employeesByDepartment) {
+            if (emp.getSkill() == Skill.MANAGER)
+                manager = emp;
+        }
+        if (manager == null) {
+            View.printConsole("В департаменте нет менеджера");
+            return;
+        }
+        ManagerService managerService = factoryManagerService(manager);
+        assert managerService != null;
+        managerService.manualAssignmentTask();
+
+    }
+
     public Employee getEmployee() {
         return employee;
     }
@@ -39,31 +61,32 @@ public class ManagerService {
                 .forEach(x -> x.setSalary(x.getSalary() * (1 + percentageIncrease)));
     }
 
-    public void informingManager(String message) {
+    public static void informingManager(String message) {
         View.printConsole(message);
     }
 
     public void manualAssignmentTask() {
+        ScannerService scannerService = new ScannerService();
         List<Task> freeTasksDepartment = TaskPlanner.getFreeTask().stream()
                 .filter(x -> x.getSkill() == department.getSkill())
                 .toList();
-        View.printConsole(freeTasksDepartment.toString());
-        int taskID = inputId("Введите id назначаемой задачи");
+        View.printConsoleList(freeTasksDepartment);
+        int taskID = scannerService.intScanner("Введите id назначаемой задачи");
         List<Task> tasks = freeTasksDepartment.stream()
                 .filter(x -> x.getId() == taskID)
                 .toList();
         if (tasks.isEmpty()) {
-            System.out.println("Неккоректное значение");
+            View.printConsole("Неккоректное значение");
             return;
         }
         Task task = tasks.get(0);
-        View.printConsole(department.getDepartmentEmployee().toString());
-        int taskIDEmployee = inputId("Введите  id рвботника для назначения задачи");
+        View.printConsoleList(department.getDepartmentEmployee());
+        int taskIDEmployee = scannerService.intScanner("Введите  id рвботника для назначения задачи");
         List<Employee> employees = department.getDepartmentEmployee().stream()
                 .filter(x -> x.getId() == taskIDEmployee)
                 .toList();
         if (employees.isEmpty()) {
-            System.out.println("Неккоректное значение");
+            View.printConsole("Неккоректное значение");
             return;
         }
         Employee employee = employees.get(0);
@@ -72,15 +95,5 @@ public class ManagerService {
         View.informingEmployee(employee, task.getPriority());
     }
 
-    public int inputId(String message) {
-        int id;
-        try {
-            id = Integer.parseInt(Input.inputPane(message));
-        } catch (NumberFormatException | NullPointerException e) {
-            View.printConsole("Неккоректный ввод");
-            id = inputId(message);
-        }
-        return id;
-    }
 
 }

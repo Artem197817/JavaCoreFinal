@@ -4,8 +4,8 @@ import java.time.LocalDate;
 
 public class Task {
     private final int id;
-    private String name;
-    private LocalDate createDate;
+    private final String name;
+    private final LocalDate createDate;
     private LocalDate factStartDate = LocalDate.of(1000,1,1);
     private  LocalDate factEndDate =LocalDate.of(1000,1,1);
     private Priority priority;
@@ -15,7 +15,7 @@ public class Task {
     private  int idEmployee = 0;
     private Status status;
 
-    public Task(String name, LocalDate createDate, Skill skill, int length) {
+    public Task(String name, Skill skill, int length) {
         this.name = name;
         this.createDate = LocalDate.now();
         this.skill = skill;
@@ -67,17 +67,8 @@ public class Task {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-
     public LocalDate getCreateDate() {
         return createDate;
-    }
-
-    public void setCreateDate(LocalDate createDate) {
-        this.createDate = createDate;
     }
 
     public LocalDate getFactStartDate() {

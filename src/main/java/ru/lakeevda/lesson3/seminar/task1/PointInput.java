@@ -1,7 +1,7 @@
 package ru.lakeevda.lesson3.seminar.task1;
 
 import ru.lakeevda.lesson3.seminar.task1.services.StartService;
-import ru.lakeevda.lesson3.seminar.task1.view.GUI;
+import ru.lakeevda.lesson3.seminar.task1.controller.GUI;
 
 public class PointInput {
 

@@ -8,15 +8,15 @@ import java.util.List;
 
 public class SelectionEmployee {
 
-    ManagerService managerService;
+
     DepartmentHRService departmentHRService;
     EmployeeService employeeService;
 
-    public SelectionEmployee(ManagerService managerService, DepartmentHRService departmentHRService, EmployeeService employeeService) {
-        this.managerService = managerService;
+    public SelectionEmployee( DepartmentHRService departmentHRService, EmployeeService employeeService) {
         this.departmentHRService = departmentHRService;
         this.employeeService = employeeService;
     }
+
 
     public Employee selectionEmployee(Skill skill, Priority priority) {
         // При большом количестве заданий необходимо считать общее время заданий и раздавать задания с учетом общей занятости работника
@@ -36,7 +36,7 @@ public class SelectionEmployee {
             } else if (checkingTotalTaskCompletionTime(employee))
                 return employee;
         }
-        managerService.informingManager("ВНИМАНИЕ МЕНЕДЖЕРОВ! "
+        ManagerService.informingManager("ВНИМАНИЕ МЕНЕДЖЕРОВ! "
                 + " нет свободных работников для выполнения задания");
         return departmentHRService.getDepartmentManager(skill);
 

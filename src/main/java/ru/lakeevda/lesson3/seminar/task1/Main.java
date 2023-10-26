@@ -70,51 +70,41 @@ public class Main {
         departmentHRService.addDepartment(departmentEngineer);
 
         Task task1 = new Task("Задача1"
-                ,LocalDate.now()
                 , Skill.ENGINEER
                 , 10);
-
         Task task2 = new Task("Задача2"
-                ,LocalDate.now()
                 , Skill.ENGINEER
                 , 120);
         Task task3 = new Task("Задача3"
-                ,LocalDate.now()
                 , Skill.ENGINEER
                 , 20);
         task3.setPriority(Priority.P1);
         Task task7 = new Task("Задача7"
-                ,LocalDate.now()
                 , Skill.ENGINEER
                 , 20);
         task7.setPriority(Priority.P1);
         Task task4 = new Task("Задача4"
-                ,LocalDate.now()
                 , Skill.TECHNOLOGIST
                 , 20);
         task3.setPriority(Priority.P1);
         Task task5 = new Task("Задача5"
-                ,LocalDate.now()
                 , Skill.ENGINEER
                 , 120);
         Task task6 = new Task("Задача6"
-                ,LocalDate.now()
                 , Skill.ENGINEER
                 , 120);
         Task task8 = new Task("Задача8"
-                ,LocalDate.now()
                 , Skill.ENGINEER
                 , 20);
         task8.setPriority(Priority.P1);
         Task task9 = new Task("Задача9"
-                ,LocalDate.now()
                 , Skill.ENGINEER
                 , 20);
         task9.setPriority(Priority.P1);
 
         ManagerService managerService = ManagerService.factoryManagerService(employee3);
         EmployeeService employeeService = new EmployeeService();
-        SelectionEmployee selectionEmployee = new SelectionEmployee(managerService, departmentHRService, employeeService);
+        SelectionEmployee selectionEmployee = new SelectionEmployee (departmentHRService, employeeService);
         TaskPlanner taskPlanner = new TaskPlanner(selectionEmployee);
 
         taskPlanner.planTask(task1);
