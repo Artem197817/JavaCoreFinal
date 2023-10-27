@@ -11,7 +11,7 @@ import java.util.List;
 public class FileService {
 
 
-    public void fileWriter(List<String> dats, String fileName, boolean append) {
+    private void fileWriter(List<String> dats, String fileName, boolean append) {
         File file = new File(fileName);
         try (FileWriter fileWriter = new FileWriter(file, append)) {
             for (String s : dats) {
@@ -49,15 +49,15 @@ public class FileService {
         List<Task> tasksComplete = new ArrayList<>();
         for (Assigment ass : assigments) {
             if (ass.getTask().getStatus() != Status.COMPLETE)
-            tasks.add(ass.getTask());
-            else  tasksComplete.add(ass.getTask());
+                tasks.add(ass.getTask());
+            else tasksComplete.add(ass.getTask());
         }
-        fileWriterTask(tasks,fileName, false);
-        fileWriterTask(freeTask,fileName, true);
-        fileWriterTask(tasksComplete,fileName1,true);
+        fileWriterTask(tasks, fileName, false);
+        fileWriterTask(freeTask, fileName, true);
+        fileWriterTask(tasksComplete, fileName1, true);
     }
 
-    public void fileWriterTask(List<Task> tasks,String fileName, boolean append) {
+    private void fileWriterTask(List<Task> tasks, String fileName, boolean append) {
         StringBuilder task = new StringBuilder();
         List<String> taskStringList = new ArrayList<>();
         for (Task tas : tasks) {
@@ -77,7 +77,7 @@ public class FileService {
         fileWriter(taskStringList, fileName, append);
     }
 
-    public List<String> fileReader(String fileName) {
+    private List<String> fileReader(String fileName) {
 
         List<String> result = new ArrayList<>();
         try (FileReader fileReader = new FileReader(fileName)) {
@@ -133,12 +133,14 @@ public class FileService {
         List<String> stringTask = fileReader(fileName);
         return parseTask(stringTask);
     }
+
     public List<Task> fileReaderTaskComplete() {
         String fileName = "taskComplete.txt";
         List<String> stringTask = fileReader(fileName);
         return parseTask(stringTask);
     }
-    public List<Task> parseTask (List<String> stringTask){
+
+    private List<Task> parseTask(List<String> stringTask) {
 
         List<Task> tasks = new ArrayList<>();
         String[] temp;
@@ -161,7 +163,7 @@ public class FileService {
             LocalDate factEndDate = LocalDate.of(Integer.parseInt(tempLocalDate[0]), Integer.parseInt(tempLocalDate[1])
                     , Integer.parseInt(tempLocalDate[2]));
             Task task = new Task(name, factStartDate, createDate, skill, priority, length, id,
-                    idEmployee, status,factEndDate);
+                    idEmployee, status, factEndDate);
             tasks.add(task);
         }
         return tasks;

@@ -23,9 +23,6 @@ public class Assigment {
         return task;
     }
 
-    public int getId() {
-        return id;
-    }
 
     @Override
     public String toString() {

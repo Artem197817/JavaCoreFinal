@@ -7,16 +7,16 @@ public class Task {
     private final int id;
     private final String name;
     private final LocalDate createDate;
-    private LocalDate factStartDate = LocalDate.of(1000,1,1);
-    private  LocalDate factEndDate =LocalDate.of(1000,1,1);
+    private LocalDate factStartDate = LocalDate.of(1000, 1, 1);
+    private LocalDate factEndDate = LocalDate.of(1000, 1, 1);
     private Priority priority;
     private Skill skill;
     private final int length;
     private static int count;
-    private  int idEmployee = -1;
+    private int idEmployee = -1;
     private Status status;
 
-    public static void initCount(int maxIdTask){
+    public static void initCount(int maxIdTask) {
         count = maxIdTask;
     }
 
@@ -29,8 +29,9 @@ public class Task {
         this.id = ++count;
         this.status = Status.NEW;
     }
-    public Task(String name, LocalDate factStartDate, LocalDate createDate, Skill skill,Priority priority,
-                int length, int id, int idEmployee,Status status, LocalDate factEndDate) {
+
+    public Task(String name, LocalDate factStartDate, LocalDate createDate, Skill skill, Priority priority,
+                int length, int id, int idEmployee, Status status, LocalDate factEndDate) {
         this.name = name;
         this.createDate = createDate;
         this.factStartDate = factStartDate;
@@ -116,7 +117,7 @@ public class Task {
                 ", priority=" + priority +
                 ", skill=" + skill +
                 ", status=" + status +
-                ", idEmployee=" + idEmployee+
+                ", idEmployee=" + idEmployee +
                 '}';
     }
 

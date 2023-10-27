@@ -12,7 +12,7 @@ public class SelectionEmployee {
     DepartmentHRService departmentHRService;
     EmployeeService employeeService;
 
-    public SelectionEmployee( DepartmentHRService departmentHRService, EmployeeService employeeService) {
+    public SelectionEmployee(DepartmentHRService departmentHRService, EmployeeService employeeService) {
         this.departmentHRService = departmentHRService;
         this.employeeService = employeeService;
     }
@@ -38,7 +38,7 @@ public class SelectionEmployee {
         }
         ManagerService.informingManager("ВНИМАНИЕ МЕНЕДЖЕРОВ! "
                 + " нет свободных работников для выполнения задания");
-        return departmentHRService.getDepartmentManager(skill);
+        return new Employee(Skill.NoSKILL);
 
     }
 

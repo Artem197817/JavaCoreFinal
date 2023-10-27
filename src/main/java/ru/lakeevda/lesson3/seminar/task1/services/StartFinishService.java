@@ -17,6 +17,7 @@ public class StartFinishService {
     }
 
     public void init() {
+
         int maxIdEmployee = -1;
         int maxIdTask = -2;
 
@@ -32,7 +33,7 @@ public class StartFinishService {
         for (Task task : tasks) {
             int idEmployee = task.getIdEmployee();
             int idTask = task.getId();
-            if(idTask > maxIdTask)
+            if (idTask > maxIdTask)
                 maxIdTask = idTask;
             if (idEmployee == -1) {
                 TaskPlanner.freeTask.add(task);

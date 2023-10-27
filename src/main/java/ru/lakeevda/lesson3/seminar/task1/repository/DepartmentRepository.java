@@ -16,8 +16,9 @@ public class DepartmentRepository {
     static public void addDepartment(Department department) {
         departmentList.add(department);
     }
-    public static Department getDepartmentBySkill (Skill skill){
-        for (Department department:departmentList) {
+
+    public static Department getDepartmentBySkill(Skill skill) {
+        for (Department department : departmentList) {
             if (department.getSkill() == skill)
                 return department;
         }

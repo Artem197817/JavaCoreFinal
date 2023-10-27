@@ -20,7 +20,7 @@ public class TaskPlanner {
 
     public void planTask(Task task) {
         Employee employee = selectionEmployee.selectionEmployee(task.getSkill(), task.getPriority());
-        if (employee.getSkill() == Skill.MANAGER) {
+        if (employee.getSkill() == Skill.NoSKILL) {
             freeTask.add(task);
             return;
         }

@@ -69,7 +69,6 @@ public class GUI {
             return;
         }
         while (isExit) {
-
             String command = scannerService.stringScanner("Введите команду. Либо воспользуйтесь командой HELP ").toUpperCase();
             switch (command) {
                 case ("EXIT") -> isExit = false;

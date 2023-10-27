@@ -9,8 +9,8 @@ public enum Priority {
 
     private final int priority;
 
-    Priority(int priority){
-        this.priority= priority;
+    Priority(int priority) {
+        this.priority = priority;
     }
 
     public int getPriority() {

@@ -11,7 +11,5 @@ public class PointInput {
         GUI gui = new GUI();
         gui.run();
         startFinishService.finish();
-
-
     }
 }

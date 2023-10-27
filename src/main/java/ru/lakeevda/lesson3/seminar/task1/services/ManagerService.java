@@ -30,10 +30,10 @@ public class ManagerService {
     }
 
     public static void assigmentTaskManual() {
-        Employee manager = null;
+        Employee manager = new Employee(Skill.NoSKILL);
         DepartmentHRService departmentHRService = new DepartmentHRService();
         List<Employee> employeesByDepartment = departmentHRService.getEmployeesByDepartment();
-        if (employeesByDepartment.isEmpty()) {
+        if (employeesByDepartment == null) {
             View.printConsole("В департаменте нет работников");
             return;
         }
@@ -41,7 +41,7 @@ public class ManagerService {
             if (emp.getSkill() == Skill.MANAGER)
                 manager = emp;
         }
-        if (manager == null) {
+        if (manager.getSkill() == Skill.NoSKILL) {
             View.printConsole("В департаменте нет менеджера");
             return;
         }

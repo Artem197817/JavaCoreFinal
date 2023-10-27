@@ -18,11 +18,11 @@ public class View {
         View.printConsole("Для " + employee + " назначена новая задача с приоритетом " + priority);
     }
 
-    public static <T> void printConsoleList(List<T> list){
+    public static <T> void printConsoleList(List<T> list) {
         list.forEach(System.out::println);
     }
 
-    public static void help (){
+    public static void help() {
         printConsole("HELP - помощь");
         printConsole("EXIT - выход из приложения");
         printConsole("GET A - список назначенных задач");
@@ -37,7 +37,7 @@ public class View {
         printConsole("EMP S - вход в подменю персонала");
     }
 
-    public static void helpEmployee(){
+    public static void helpEmployee() {
         printConsole("HELP - помощь");
         printConsole("EXIT - выход из приложения");
         printConsole("EMP ST - взять задачу");

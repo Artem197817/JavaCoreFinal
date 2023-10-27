@@ -4,17 +4,17 @@ package ru.lakeevda.lesson3.seminar.task1.model;
 import java.time.LocalDate;
 
 public class Employee {
-    private  String lastName;
-    private  String firstName;
-    private  LocalDate birthDate;
+    private String lastName;
+    private String firstName;
+    private LocalDate birthDate;
     private double salary;
     private Department department;
     private Skill skill;
-    private  int id;
+    private int id;
     private static int count;
     private boolean isWorking = false;
 
-    public static void initCount (int maxIdEmployee){
+    public static void initCount(int maxIdEmployee) {
         count = maxIdEmployee;
     }
 
@@ -38,8 +38,9 @@ public class Employee {
         this.department = department;
 
     }
-    public Employee (Skill skill){
-        this.skill=skill;
+
+    public Employee(Skill skill) {
+        this.skill = skill;
     }
 
     public String getLastName() {

@@ -16,7 +16,8 @@ public class EmployeeService {
                 .filter(x -> x.getEmployee() == employee)
                 .toList();
     }
-    public List<Assigment> getAssigmentsByIdEmployee(){
+
+    public List<Assigment> getAssigmentsByIdEmployee() {
         ScannerService scannerService = new ScannerService();
         Employee employee = EmployeeRepository.getEmployeeById(scannerService.intScanner("Введите id сотрудника"));
         if (employee.getSkill() == Skill.NoSKILL)

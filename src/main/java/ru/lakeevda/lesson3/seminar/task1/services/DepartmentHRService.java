@@ -9,19 +9,13 @@ import ru.lakeevda.lesson3.seminar.task1.services.exeption.SkillException;
 import ru.lakeevda.lesson3.seminar.task1.view.View;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 public class DepartmentHRService {
 
-    public List<Department> departments;
 
     public ScannerService scannerService = new ScannerService();
 
-    public void addDepartment(Department department) {
-        if (departments == null) departments = new ArrayList<>();
-        departments.add(department);
-    }
 
     public void addEmployeeDepartment(Department department, Employee employee) {
         department.addEmployee(employee);
@@ -39,17 +33,6 @@ public class DepartmentHRService {
         }
     }
 
-    public Employee getDepartmentManager(Skill skill) {
-        List<Department> departmentSortSkill = departments.stream()
-                .filter(x -> x.getSkill() == skill)
-                .toList();
-        try {
-            return departmentSortSkill.get(0).getManager();
-        } catch (ArrayIndexOutOfBoundsException e) {
-            return new Employee("", "", LocalDate.of(1950, 1, 1), 0, Skill.MANAGER);
-        }
-    }
-
     public List<Employee> getEmployeesByDepartment() {
         Department department = DepartmentRepository.getDepartmentBySkill(scannerService.skillScanner("Skill department"));
         return department.getDepartmentEmployee();
@@ -64,9 +47,10 @@ public class DepartmentHRService {
         Skill skill = scannerService.skillScanner("Skill");
         Employee employee = new Employee(lastName, firstName, birthDay, salary, skill);
         EmployeeRepository.addEmployee(employee);
-        Department department = DepartmentRepository.getDepartmentBySkill(skill);
+        Skill skillDepartment = scannerService.skillScanner("Skill department");
+        Department department = DepartmentRepository.getDepartmentBySkill(skillDepartment);
         if (department.getSkill() == Skill.NoSKILL)
-            department = new Department(skill);
+            department = new Department(skillDepartment);
         addEmployeeDepartment(department, employee);
     }
 }

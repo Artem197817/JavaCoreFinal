@@ -59,7 +59,7 @@ public class ScannerService {
         return checkSkill(stringScanner(message), message);
     }
 
-    public Skill checkSkill(String skill, String message) {
+    private Skill checkSkill(String skill, String message) {
         try {
             return Skill.valueOf(skill.toUpperCase());
         } catch (IllegalArgumentException e) {
@@ -72,7 +72,7 @@ public class ScannerService {
         return checkPriority(stringScanner(message), message);
     }
 
-    public Priority checkPriority(String priority, String message) {
+    private Priority checkPriority(String priority, String message) {
         try {
             return Priority.valueOf(priority.toUpperCase());
         } catch (IllegalArgumentException e) {
@@ -81,13 +81,8 @@ public class ScannerService {
         return priorityScanner(message);
     }
 
-
     public void close() {
         scanner.close();
     }
 
- /*  public static void main(String[] args) {
-        ScannerService scannerService = new ScannerService();
-        System.out.println(scannerService.priorityScanner("skill"));
-    } */
 }
