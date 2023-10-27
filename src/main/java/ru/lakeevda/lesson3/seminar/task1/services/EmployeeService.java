@@ -39,7 +39,6 @@ public class EmployeeService {
                 .filter(x -> x.getTask().getStatus() != Status.COMPLETE)
                 .sorted(Comparator.comparingInt(x -> x.getTask().getPriority().getPriority()))
                 .toList();
-        assigmentsSort.forEach(System.out::println);
         if (assigmentsSort.isEmpty()) {
             View.printConsole("Спмсок назначенных задач пуст");
             return;

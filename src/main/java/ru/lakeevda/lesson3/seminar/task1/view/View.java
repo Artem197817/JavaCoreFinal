@@ -36,4 +36,14 @@ public class View {
         printConsole("TASK M - назначение задач в ручную из списка неназначенных задач");
         printConsole("EMP S - вход в подменю персонала");
     }
+
+    public static void helpEmployee(){
+        printConsole("HELP - помощь");
+        printConsole("EXIT - выход из приложения");
+        printConsole("EMP ST - взять задачу");
+        printConsole("EMP FT - завершить задачу");
+        printConsole("EMP HT - отложить задачу");
+        printConsole("EMP LT - список задач");
+
+    }
 }

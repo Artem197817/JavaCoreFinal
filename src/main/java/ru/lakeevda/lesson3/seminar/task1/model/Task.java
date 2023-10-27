@@ -1,6 +1,7 @@
 package ru.lakeevda.lesson3.seminar.task1.model;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class Task {
     private final int id;
@@ -11,9 +12,13 @@ public class Task {
     private Priority priority;
     private Skill skill;
     private final int length;
-    private static int count = 1;
-    private  int idEmployee = 0;
+    private static int count;
+    private  int idEmployee = -1;
     private Status status;
+
+    public static void initCount(int maxIdTask){
+        count = maxIdTask;
+    }
 
     public Task(String name, Skill skill, int length) {
         this.name = name;
@@ -21,7 +26,7 @@ public class Task {
         this.skill = skill;
         this.priority = Priority.P2;
         this.length = length;
-        this.id = count++;
+        this.id = ++count;
         this.status = Status.NEW;
     }
     public Task(String name, LocalDate factStartDate, LocalDate createDate, Skill skill,Priority priority,
@@ -36,6 +41,7 @@ public class Task {
         this.status = status;
         this.idEmployee = idEmployee;
         this.factEndDate = factEndDate;
+
 
     }
 
@@ -116,5 +122,18 @@ public class Task {
 
     public LocalDate getFactEndDate() {
         return factEndDate;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Task task = (Task) o;
+        return id == task.id && Objects.equals(name, task.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name);
     }
 }

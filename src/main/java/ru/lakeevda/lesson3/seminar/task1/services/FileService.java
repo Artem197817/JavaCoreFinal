@@ -139,6 +139,7 @@ public class FileService {
         return parseTask(stringTask);
     }
     public List<Task> parseTask (List<String> stringTask){
+
         List<Task> tasks = new ArrayList<>();
         String[] temp;
         for (String str : stringTask) {

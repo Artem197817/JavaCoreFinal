@@ -93,6 +93,7 @@ public class ManagerService {
         Assigment assigment = new Assigment(employee, task);
         AssigmentRepository.addAssigment(assigment);
         View.informingEmployee(employee, task.getPriority());
+        TaskPlanner.removeFreeTask(task);
     }
 
 

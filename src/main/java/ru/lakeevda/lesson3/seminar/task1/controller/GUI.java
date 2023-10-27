@@ -1,9 +1,13 @@
 package ru.lakeevda.lesson3.seminar.task1.controller;
 
+import ru.lakeevda.lesson3.seminar.task1.model.Employee;
+import ru.lakeevda.lesson3.seminar.task1.model.Skill;
 import ru.lakeevda.lesson3.seminar.task1.repository.AssigmentRepository;
 import ru.lakeevda.lesson3.seminar.task1.repository.EmployeeRepository;
 import ru.lakeevda.lesson3.seminar.task1.services.*;
 import ru.lakeevda.lesson3.seminar.task1.view.View;
+
+import java.util.List;
 
 
 public class GUI {
@@ -37,17 +41,48 @@ public class GUI {
                 case ("GET FT") -> TaskPlanner.getFreeTask().forEach(System.out::println);
                 case ("GET E") -> EmployeeRepository.getEmployees().forEach(System.out::println);
                 case ("GET AE") -> employeeService.getAssigmentsByIdEmployee().forEach(System.out::println);
-                case ("GET ADE") -> departmentHRService.getEmployeesByDepartment().forEach(System.out::println);
+                case ("GET ADE") -> {
+                    List<Employee> employees = departmentHRService.getEmployeesByDepartment();
+                    if (employees == null)
+                        View.printConsole("No employee");
+                    else employees.forEach(System.out::println);
+                }
                 case ("CREATE E") -> departmentHRService.createEmployee();
                 case ("CREATE T") -> taskPlanner.createTask();
-                case ("GET CT") -> fileService.fileReaderTaskComplete();
+                case ("GET CT") -> fileService.fileReaderTaskComplete().forEach(System.out::println);
                 case ("TASK M") -> ManagerService.assigmentTaskManual();
+                case ("EMP S") -> employeeGUI();
                 default -> {
                     View.printConsole("Команда не распознана");
                     View.help();
                 }
             }
         }
+    }
 
+    public void employeeGUI() {
+        boolean isExit = true;
+        int idEmployee = scannerService.intScanner("Введите id пользователя");
+        Employee employee = EmployeeRepository.getEmployeeById(idEmployee);
+        if (employee.getSkill() == Skill.NoSKILL) {
+            View.printConsole("No employee");
+            return;
+        }
+        while (isExit) {
+
+            String command = scannerService.stringScanner("Введите команду. Либо воспользуйтесь командой HELP ").toUpperCase();
+            switch (command) {
+                case ("EXIT") -> isExit = false;
+                case ("HELP") -> View.helpEmployee();
+                case ("EMP ST") -> employeeService.startTaskByEmployee(employee);
+                case ("EMP FT") -> employeeService.finishTaskByEmployee(employee);
+                case ("EMP HT") -> employeeService.onHoldCurrentTask(employee);
+                case ("EMP LT") -> employeeService.getAssigmentsByEmployee(employee).forEach(System.out::println);
+                default -> {
+                    View.printConsole("Команда не распознана");
+                    View.helpEmployee();
+                }
+            }
+        }
     }
 }

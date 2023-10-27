@@ -1,6 +1,5 @@
 package ru.lakeevda.lesson3.seminar.task1.services;
 
-import org.jetbrains.annotations.NotNull;
 import ru.lakeevda.lesson3.seminar.task1.model.Department;
 import ru.lakeevda.lesson3.seminar.task1.model.Employee;
 import ru.lakeevda.lesson3.seminar.task1.model.Skill;
@@ -17,9 +16,9 @@ public class DepartmentHRService {
 
     public List<Department> departments;
 
-   public ScannerService scannerService = new ScannerService();
+    public ScannerService scannerService = new ScannerService();
 
-    public void addDepartment (Department department) {
+    public void addDepartment(Department department) {
         if (departments == null) departments = new ArrayList<>();
         departments.add(department);
     }
@@ -29,7 +28,7 @@ public class DepartmentHRService {
         employee.setDepartment(department);
     }
 
-    public void appointManager(Department department, @NotNull Employee manager) {
+    public void appointManager(Department department, Employee manager) {
         try {
             if (manager.getSkill() == Skill.MANAGER || manager.getSkill() == Skill.DIRECTOR) {
                 department.setManager(manager);
@@ -39,30 +38,35 @@ public class DepartmentHRService {
             View.printConsole(e.getMessage());
         }
     }
-    public Employee getDepartmentManager (Skill skill){
-       List<Department>  departmentSortSkill = departments.stream()
-               .filter(x-> x.getSkill() == skill)
-               .toList();
-      try {
-          return departmentSortSkill.get(0).getManager();
-      }catch (ArrayIndexOutOfBoundsException e){
-          return new Employee("","", LocalDate.of(1950,1,1),0,Skill.MANAGER);
-      }
+
+    public Employee getDepartmentManager(Skill skill) {
+        List<Department> departmentSortSkill = departments.stream()
+                .filter(x -> x.getSkill() == skill)
+                .toList();
+        try {
+            return departmentSortSkill.get(0).getManager();
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return new Employee("", "", LocalDate.of(1950, 1, 1), 0, Skill.MANAGER);
+        }
     }
 
-    public List<Employee> getEmployeesByDepartment (){
-    Department department = DepartmentRepository.getDepartmentBySkill(scannerService.skillScanner("Skill department"));
-    return department.getDepartmentEmployee();
+    public List<Employee> getEmployeesByDepartment() {
+        Department department = DepartmentRepository.getDepartmentBySkill(scannerService.skillScanner("Skill department"));
+        return department.getDepartmentEmployee();
     }
 
-    public void createEmployee (){
+    public void createEmployee() {
 
         String lastName = scannerService.stringScanner("Фамилия");
         String firstName = scannerService.stringScanner("Имя");
         LocalDate birthDay = scannerService.dateScanner("День рождения");
-        double salary = (double) scannerService.intScanner("Заработная плата");
+        double salary = scannerService.intScanner("Заработная плата");
         Skill skill = scannerService.skillScanner("Skill");
-        Employee employee = new Employee(lastName,firstName,birthDay,salary,skill);
+        Employee employee = new Employee(lastName, firstName, birthDay, salary, skill);
         EmployeeRepository.addEmployee(employee);
+        Department department = DepartmentRepository.getDepartmentBySkill(skill);
+        if (department.getSkill() == Skill.NoSKILL)
+            department = new Department(skill);
+        addEmployeeDepartment(department, employee);
     }
 }

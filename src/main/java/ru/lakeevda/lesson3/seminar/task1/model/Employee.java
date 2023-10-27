@@ -1,5 +1,6 @@
 package ru.lakeevda.lesson3.seminar.task1.model;
 
+
 import java.time.LocalDate;
 
 public class Employee {
@@ -11,8 +12,11 @@ public class Employee {
     private Skill skill;
     private  int id;
     private static int count;
-
     private boolean isWorking = false;
+
+    public static void initCount (int maxIdEmployee){
+        count = maxIdEmployee;
+    }
 
     public Employee(String lastName, String firstName, LocalDate birthDate, double salary, Skill skill) {
         this.lastName = lastName;
@@ -20,7 +24,7 @@ public class Employee {
         this.birthDate = birthDate;
         this.salary = salary;
         this.skill = skill;
-        this.id = count++;
+        this.id = ++count;
     }
 
     public Employee(String lastName, String firstName, LocalDate birthDate, double salary
@@ -32,8 +36,11 @@ public class Employee {
         this.skill = skill;
         this.id = id;
         this.department = department;
+
     }
-    public Employee (Skill skill){}
+    public Employee (Skill skill){
+        this.skill=skill;
+    }
 
     public String getLastName() {
         return lastName;

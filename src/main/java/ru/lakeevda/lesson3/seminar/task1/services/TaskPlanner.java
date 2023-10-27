@@ -44,5 +44,8 @@ public class TaskPlanner {
         task.setPriority(priority);
         planTask(task);
     }
+    public static void removeFreeTask (Task task){
+        freeTask.remove(task);
+    }
 
 }
